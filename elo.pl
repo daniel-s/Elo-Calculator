@@ -47,7 +47,3 @@ for %player.keys -> $p1
 	say "$p1 has rating of: %player{$p1}";
 }
 
-say @results;
-@results.sort;
-say @results;
-say @results.sort;
