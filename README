@@ -1,1 +1,44 @@
 Elo rating calculator
+
+USAGE
+
+From terminal, type:
+perl6 elo.pl
+
+The calculations are very straightforward. A list of game
+results are in a file called "results.csv" (in the same
+directory as the script). These are of the format:
+
+Player1:Player2:Score
+
+Where score is the score as far as Player1 is concerned. A
+victory of Bob over Alice looks like:
+
+Alice:Bob:0
+
+The players' elo ratings come out in elo_list.csv
+
+TO DO
+
+* Maybe add command-line arguments to allow input and output
+from differently named files.
+* Maybe allow inputting of already established elo ratings.
+(If you would like a feature/change/fix contact me)
+
+
+
+
+Elo-Calculator is Copyright (C) 2011, Daniel Stojanov
+
+LICENSE INFORMATION
+
+This code is free software; you
+can redistribute it and/or modify it under the terms of the
+Artistic License 2.0. For details, see the full text of the
+license in the file LICENSE.
+
+This program is distributed in the hope that it will be
+useful, but it is provided “as is” and without any express
+or implied warranties. For details, see the full text of
+the license in the file LICENSE.
+
