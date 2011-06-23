@@ -7,13 +7,13 @@ class Chess::elo:auth<daniel-s>:ver<0.1>
     # NOTE: this is actually not used by any of the following elo() functions
     method expectedBoth ($p1, $p2)
     {
-        return (1/(1+10**(($p1 - $p2)/400))), (1/(1+10**(($p2 - $p1)/400)));
+        return (1/(1+10**(($p2 - $p1)/400))), (1/(1+10**(($p1 - $p2)/400)));
     }
 
     # return the expected score of only one player ($p1)
     method expected ($p1, $p2)
     {
-        return 1/(1+10**(($p1 - $p2)/400));
+        return 1/(1+10**(($p2 - $p1)/400));
     }
 
     # update rating of only $p1 (default k=32)
