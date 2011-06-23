@@ -1,27 +1,62 @@
 Elo rating calculator
 
+This is a module and script to process a list of game results and produce player rankings based on the Elo algorithm. For more information about Elo, see https://secure.wikimedia.org/wikipedia/en/wiki/Elo_rating_system
+
+
+
 USAGE
 
 From terminal, type:
 perl6 elo.pl
 
-The calculations are very straightforward. A list of game
-results are in a file called "results.csv" (in the same
-directory as the script). These are of the format:
+elo.pl will look for a file called "results.csv" (in the local directory from which it is called). It expects results to be in the format 
 
 Player1:Player2:Score
 
-Where score is the score as far as Player1 is concerned. A
-victory of Bob over Alice looks like:
+Where "Score" is the score as far as Player1 is concerned. A victory of Bob over Alice looks like:
 
 Alice:Bob:0
 
+A draw looks like
+
+Alice:Bob:.5
+
 The players' elo ratings come out in elo_list.csv
+
+
+
+USE AS MODULE
+
+This application itself actually uses two components. The file elo.pm implements the calculations related to the elo algorithm and the file elo.pl does the processing, importing the module to process the calculations.
+
+To use the module, install it where perl can see it, then use:
+
+use Chess::elo;
+
+sub expectedBoth ($p1, $p2)
+sub expected ($p1, $p2)
+
+These two functions above return the expected result when supplied with the elo scores of two players. expected() returns only one result - for player 1. expectedBoth() returns a list ($player1, $player2), letting you collected expected results from just one function.
+
+sub elo ($p1, $p2, $score)
+sub eloBoth ($p1, $p2, $score)
+
+These two above return the new elo ranks after an event. They take the previous elo ranks and $score is the outcome. ie. 1 if player1 won, 0.5 for draw, 0 if player 2 won (ie. player 1 lost). As before, they return the new ranks of player 1 for elo(), and both for eloBoth().
+
+sub eloK ($p1, $p2, $score, $k)
+sub eloBothK ($p1, $p2, $score, $k)
+
+These two functions work just as before, but allow the option of supplying a custom K factor.
+
+sub eloN ($p1, $score, $k, $e)
+
+The above function works like eloK(), but also allows for a custom expected result. (all previous functions make a call to expected().
+
+
 
 TO DO
 
-* Maybe add command-line arguments to allow input and output
-from differently named files.
+* Maybe add command-line arguments to allow input and output from differently named files.
 * Maybe allow inputting of already established elo ratings.
 (If you would like a feature/change/fix contact me)
 
@@ -38,7 +73,7 @@ Artistic License 2.0. For details, see the full text of the
 license in the file LICENSE.
 
 This program is distributed in the hope that it will be
-useful, but it is provided “as is” and without any express
+useful, but it is provided "as is" and without any express
 or implied warranties. For details, see the full text of
 the license in the file LICENSE.
 
